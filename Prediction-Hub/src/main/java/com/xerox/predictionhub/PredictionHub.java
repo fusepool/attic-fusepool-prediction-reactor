@@ -60,6 +60,13 @@ public class PredictionHub implements HubEngine {
          * 2) Add it to the List
          * 3) Plug the Listener with the TripleFilter to the AS
          */
+         /**
+          * Adding a very defensive condition to make sure LUPs don't access the register
+          * method before the PredictionHub was properly instanciated
+         */
+        if (lupIndex == null) {
+            lupIndex = new HashMap<String,LUPEngine>();
+        }
         String name = p.getName();
         if (lupIndex.containsKey(name)) {
             return;
